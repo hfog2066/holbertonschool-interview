@@ -1,19 +1,16 @@
 #!/usr/bin/python3
 
-
 def canUnlockAll(boxes):
-    if not boxes:
+    if type(boxes) is not list:
         return False
-
-    opened = {}
-    queue = [0]
-
-    while queue:
-        boxNum = queue.pop(0)
-        opened[boxNum] = 1
-        for key in boxes[boxNum]:
-            if key >= 0 and key < len(boxes) and not opened.get(key)\
-                    and (key not in queue):
-                queue.append(key)
-
-    return True if (len(opened) == len(boxes)) else False
+    elif (len(boxes)) == 0:
+        return False
+    for k in range(1, len(boxes) - 1):
+        boxes_checked = False
+        for idx in range(len(boxes)):
+            boxes_checked = k in boxes[idx] and k != idx
+            if boxes_checked:
+                break
+        if boxes_checked is False:
+            return boxes_checked
+    return True
